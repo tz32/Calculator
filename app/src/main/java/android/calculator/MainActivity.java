@@ -1,6 +1,8 @@
 package android.calculator;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    View view;
     TextView answertext;
 
     Button button1;
@@ -42,6 +45,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        view = this.getWindow().getDecorView();
 
         answertext = (TextView) findViewById(R.id.answertext);
 
@@ -104,6 +109,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         buttondecimal = (Button) findViewById(R.id.buttondecimal);
         buttondecimal.setOnClickListener(this);
+
+        setColors();
+    }
+
+    private void setColors() {
+        Intent intent = getIntent();
+        int bgred = intent.getIntExtra("bgred", 255);
+        int bggreen = intent.getIntExtra("bgred", 255);
+        int bgblue = intent.getIntExtra("bgred", 255);
+
+        int buttonred = intent.getIntExtra("bgred", 255);
+        int buttongreen = intent.getIntExtra("bgred", 255);
+        int buttonblue = intent.getIntExtra("bgred", 255);
+
+        int textred = intent.getIntExtra("bgred", 255);
+        int textgreen = intent.getIntExtra("bgred", 255);
+        int textblue = intent.getIntExtra("bgred", 255);
+
+        view.setBackgroundColor(Color.rgb(bgred, bggreen, bgblue));
+
     }
 
     @Override
@@ -134,6 +159,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button1:
+                setColors();
                 answertext.append("1");
                 break;
 
@@ -223,7 +249,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonsettings:
-
+                    Intent intent = new Intent(MainActivity.this, Settings.class);
+                    startActivity(intent);
                 break;
 
             case R.id.buttonplusminus:
