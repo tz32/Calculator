@@ -33,6 +33,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button buttondivide;
     Button buttondecimal;
 
+    boolean decimalpresent = false;
+    float value1 = 0;
+    float value2 = 0;
+    String currentoperator = "none";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,19 +174,46 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonminus:
-
+                if (currentoperator == "none") {
+                    value1 = Float.parseFloat(answertext.getText().toString());
+                    currentoperator = "-";
+                    answertext.setText("");
+                } else {
+                    value2 = Float.parseFloat(answertext.getText().toString());
+                    performOperation();
+                    currentoperator = "-";
+                }
                 break;
 
             case R.id.buttonplus:
-
+                if (currentoperator == "none") {
+                    value1 = Float.parseFloat(answertext.getText().toString());
+                    currentoperator = "+";
+                    answertext.setText("");
+                } else {
+                    value2 = Float.parseFloat(answertext.getText().toString());
+                    performOperation();
+                    currentoperator = "+";
+                }
                 break;
 
             case R.id.buttonequals:
-
+                if (currentoperator == "none") {
+                    value1 = Float.parseFloat(answertext.getText().toString());
+                    //currentoperator = "none";
+                    //answertext.setText("");
+                } else {
+                    value2 = Float.parseFloat(answertext.getText().toString());
+                    performOperation();
+                    currentoperator = "none";
+                }
                 break;
 
             case R.id.buttonclear:
                 answertext.setText("");
+                value1 = 0;
+                value2 = 0;
+                currentoperator = "none";
                 break;
 
             case R.id.buttonbackspace:
@@ -196,24 +227,78 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonplusminus:
-
+                //answertext.getText().subSequence(0, 0);
+                if ((answertext.getText().charAt(0) != '-'))
+                    answertext.setText("-" + answertext.getText());
+                else
+                    answertext.setText(answertext.getText().subSequence(1, answertext.getText().length()));
                 break;
 
             case R.id.buttonmult:
-
+                if (currentoperator == "none") {
+                    value1 = Float.parseFloat(answertext.getText().toString());
+                    currentoperator = "*";
+                    answertext.setText("");
+                } else {
+                    value2 = Float.parseFloat(answertext.getText().toString());
+                    performOperation();
+                    currentoperator = "*";
+                }
                 break;
 
             case R.id.buttondivide:
-
+                if (currentoperator == "none") {
+                    value1 = Float.parseFloat(answertext.getText().toString());
+                    currentoperator = "/";
+                    answertext.setText("");
+                } else {
+                    value2 = Float.parseFloat(answertext.getText().toString());
+                    performOperation();
+                    currentoperator = "/";
+                }
                 break;
 
             case R.id.buttondecimal:
-                answertext.append(".");
+                if (!containsdecimal(answertext.getText()))
+                    answertext.append(".");
+
                 break;
 
             default:
 
                 break;
+        }
+    }
+
+    private boolean containsdecimal(CharSequence text) {
+        for (int i = 0; i < text.length(); i++)
+        {
+            if (text.charAt(i) == ('.'))
+                return true;
+        }
+        return false;
+    }
+
+    private void performOperation() {
+        switch (currentoperator)
+        {
+            case "+":
+                value1 = value1 + value2;
+                answertext.setText(Float.toString(value1));
+                break;
+            case "-":
+                value1 = value1 - value2;
+                answertext.setText(Float.toString(value1));
+                break;
+            case "/":
+                value1 = value1 / value2;
+                answertext.setText(Float.toString(value1));
+                break;
+            case "*":
+                value1 = value1 * value2;
+                answertext.setText(Float.toString(value1));
+                break;
+
         }
     }
 }
