@@ -1,7 +1,6 @@
 package android.calculator;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,9 +36,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button buttonmult;
     Button buttondivide;
     Button buttondecimal;
-    Button buttonbgcolor;
     Button buttonbuttoncolor;
     Button buttontextcolor;
+    Button buttonreset;
 
     int red, green, blue;
 
@@ -116,14 +115,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         buttondecimal = (Button) findViewById(R.id.buttondecimal);
         buttondecimal.setOnClickListener(this);
 
-        buttonbgcolor = (Button) findViewById(R.id.buttonbgcolor);
-        buttonbgcolor.setOnClickListener(this);
-
         buttonbuttoncolor = (Button) findViewById(R.id.buttonbuttoncolor);
         buttonbuttoncolor.setOnClickListener(this);
 
         buttontextcolor = (Button) findViewById(R.id.buttontextcolor);
         buttontextcolor.setOnClickListener(this);
+
+        buttonreset = (Button) findViewById(R.id.buttonreset);
+        buttonreset.setOnClickListener(this);
+
+        setBackgroundColor(0, 0, 0);
+
+        setTextColors(255, 255, 255);
     }
 
     @Override
@@ -287,18 +290,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.buttonbgcolor:
-                if (!containsdecimal(answertext.getText()))
-                    answertext.append(".");
-
-                break;
-
             case R.id.buttonbuttoncolor:
                 red = rand.nextInt(255);
                 green = rand.nextInt(255);
                 blue = rand.nextInt(255);
 
-                button0.setBackgroundColor(Color.rgb(red, green, blue));
+                setBackgroundColor(red, green, blue);
+
+
 
                 break;
 
@@ -307,11 +306,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 green = rand.nextInt(255);
                 blue = rand.nextInt(255);
 
-                button0.setBackgroundColor(Color.rgb(red, green, blue));
+                setTextColors(red, green, blue);
                 break;
 
             case R.id.buttonreset:
-
+                setBackgroundColor(0, 0, 0);
+                setTextColors(255, 255, 255);
                 break;
 
             case R.id.buttondecimal:
@@ -324,6 +324,62 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                 break;
         }
+    }
+
+    private void setTextColors(int red, int green, int blue) {
+        answertext.setTextColor(Color.rgb(red, green, blue));
+
+        button0.setTextColor(Color.rgb(red, green, blue));
+        button1.setTextColor(Color.rgb(red, green, blue));
+        button2.setTextColor(Color.rgb(red, green, blue));
+        button3.setTextColor(Color.rgb(red, green, blue));
+        button4.setTextColor(Color.rgb(red, green, blue));
+        button5.setTextColor(Color.rgb(red, green, blue));
+        button6.setTextColor(Color.rgb(red, green, blue));
+        button7.setTextColor(Color.rgb(red, green, blue));
+        button8.setTextColor(Color.rgb(red, green, blue));
+        button9.setTextColor(Color.rgb(red, green, blue));
+        button0.setTextColor(Color.rgb(red, green, blue));
+        buttonbackspace.setTextColor(Color.rgb(red, green, blue));
+        buttonclear.setTextColor(Color.rgb(red, green, blue));
+        buttonplusminus.setTextColor(Color.rgb(red, green, blue));
+        buttondivide.setTextColor(Color.rgb(red, green, blue));
+        buttonmult.setTextColor(Color.rgb(red, green, blue));
+        buttonminus.setTextColor(Color.rgb(red, green, blue));
+        buttonplus.setTextColor(Color.rgb(red, green, blue));
+        buttonequals.setTextColor(Color.rgb(red, green, blue));
+        buttondecimal.setTextColor(Color.rgb(red, green, blue));
+        buttonbuttoncolor.setTextColor(Color.rgb(red, green, blue));
+        buttontextcolor.setTextColor(Color.rgb(red, green, blue));
+        buttonreset.setTextColor(Color.rgb(red, green, blue));
+    }
+
+    private void setBackgroundColor(int red, int green, int blue) {
+        view.setBackgroundColor(Color.rgb(red, green, blue));
+
+        button0.setBackgroundColor(Color.rgb(red, green, blue));
+        button1.setBackgroundColor(Color.rgb(red, green, blue));
+        button2.setBackgroundColor(Color.rgb(red, green, blue));
+        button3.setBackgroundColor(Color.rgb(red, green, blue));
+        button4.setBackgroundColor(Color.rgb(red, green, blue));
+        button5.setBackgroundColor(Color.rgb(red, green, blue));
+        button6.setBackgroundColor(Color.rgb(red, green, blue));
+        button7.setBackgroundColor(Color.rgb(red, green, blue));
+        button8.setBackgroundColor(Color.rgb(red, green, blue));
+        button9.setBackgroundColor(Color.rgb(red, green, blue));
+        button0.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonbackspace.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonclear.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonplusminus.setBackgroundColor(Color.rgb(red, green, blue));
+        buttondivide.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonmult.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonminus.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonplus.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonequals.setBackgroundColor(Color.rgb(red, green, blue));
+        buttondecimal.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonbuttoncolor.setBackgroundColor(Color.rgb(red, green, blue));
+        buttontextcolor.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonreset.setBackgroundColor(Color.rgb(red, green, blue));
     }
 
     private boolean containsdecimal(CharSequence text) {
