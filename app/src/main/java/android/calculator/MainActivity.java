@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button buttonbuttoncolor;
     Button buttontextcolor;
 
-
+    int red, green, blue;
 
 
     float value1 = 0;
@@ -294,16 +294,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonbuttoncolor:
-                int red = rand.nextInt(255);
-                int green = rand.nextInt(255);
-                int blue = rand.nextInt(255);
+                red = rand.nextInt(255);
+                green = rand.nextInt(255);
+                blue = rand.nextInt(255);
 
                 button0.setBackgroundColor(Color.rgb(red, green, blue));
 
                 break;
 
             case R.id.buttontextcolor:
+                red = rand.nextInt(255);
+                green = rand.nextInt(255);
+                blue = rand.nextInt(255);
 
+                button0.setBackgroundColor(Color.rgb(red, green, blue));
                 break;
 
             case R.id.buttonreset:
