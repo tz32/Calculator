@@ -7,4 +7,5 @@
     <string name="BackspaceChar">\u232b</string>
     <string name="plusMinusString">\u00b1</string>
     <string name="squareRootString">\u221a</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
