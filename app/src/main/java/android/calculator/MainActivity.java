@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class MainActivity extends Activity implements View.OnClickListener {
 
     View view;
     TextView answertext;
+    Random rand;
 
     Button button1;
     Button button2;
@@ -30,13 +33,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button buttonequals;
     Button buttonclear;
     Button buttonbackspace;
-    Button buttonsettings;
     Button buttonplusminus;
     Button buttonmult;
     Button buttondivide;
     Button buttondecimal;
+    Button buttonbgcolor;
+    Button buttonbuttoncolor;
+    Button buttontextcolor;
 
-    boolean decimalpresent = false;
+
+
+
     float value1 = 0;
     float value2 = 0;
     String currentoperator = "none";
@@ -47,6 +54,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         view = this.getWindow().getDecorView();
+
+        rand = new Random();
 
         answertext = (TextView) findViewById(R.id.answertext);
 
@@ -95,9 +104,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         buttonbackspace = (Button) findViewById(R.id.buttonbackspace);
         buttonbackspace.setOnClickListener(this);
 
-        buttonsettings = (Button) findViewById(R.id.buttonsettings);
-        buttonsettings.setOnClickListener(this);
-
         buttonplusminus = (Button) findViewById(R.id.buttonplusminus);
         buttonplusminus.setOnClickListener(this);
 
@@ -110,25 +116,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         buttondecimal = (Button) findViewById(R.id.buttondecimal);
         buttondecimal.setOnClickListener(this);
 
-        setColors();
-    }
+        buttonbgcolor = (Button) findViewById(R.id.buttonbgcolor);
+        buttonbgcolor.setOnClickListener(this);
 
-    private void setColors() {
-        Intent intent = getIntent();
-        int bgred = intent.getIntExtra("bgred", 255);
-        int bggreen = intent.getIntExtra("bgred", 255);
-        int bgblue = intent.getIntExtra("bgred", 255);
+        buttonbuttoncolor = (Button) findViewById(R.id.buttonbuttoncolor);
+        buttonbuttoncolor.setOnClickListener(this);
 
-        int buttonred = intent.getIntExtra("bgred", 255);
-        int buttongreen = intent.getIntExtra("bgred", 255);
-        int buttonblue = intent.getIntExtra("bgred", 255);
-
-        int textred = intent.getIntExtra("bgred", 255);
-        int textgreen = intent.getIntExtra("bgred", 255);
-        int textblue = intent.getIntExtra("bgred", 255);
-
-        view.setBackgroundColor(Color.rgb(bgred, bggreen, bgblue));
-
+        buttontextcolor = (Button) findViewById(R.id.buttontextcolor);
+        buttontextcolor.setOnClickListener(this);
     }
 
     @Override
@@ -159,7 +154,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button1:
-                setColors();
                 answertext.append("1");
                 break;
 
@@ -200,38 +194,44 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonminus:
-                if (currentoperator == "none") {
-                    value1 = Float.parseFloat(answertext.getText().toString());
-                    currentoperator = "-";
-                    answertext.setText("");
-                } else {
-                    value2 = Float.parseFloat(answertext.getText().toString());
-                    performOperation();
-                    currentoperator = "-";
+                if ((answertext.getText().length() > 0) && (!(answertext.getText().toString().equals("."))) && (!(answertext.getText().toString().equals("-.")))){
+                    if (currentoperator == "none") {
+                        value1 = Float.parseFloat(answertext.getText().toString());
+                        currentoperator = "-";
+                        answertext.setText("");
+                    } else {
+                        value2 = Float.parseFloat(answertext.getText().toString());
+                        performOperation();
+                        currentoperator = "-";
+                    }
                 }
                 break;
 
             case R.id.buttonplus:
-                if (currentoperator == "none") {
-                    value1 = Float.parseFloat(answertext.getText().toString());
-                    currentoperator = "+";
-                    answertext.setText("");
-                } else {
-                    value2 = Float.parseFloat(answertext.getText().toString());
-                    performOperation();
-                    currentoperator = "+";
+                if ((answertext.getText().length() > 0) && (!(answertext.getText().toString().equals("."))) && (!(answertext.getText().toString().equals("-.")))){
+                    if (currentoperator == "none") {
+                        value1 = Float.parseFloat(answertext.getText().toString());
+                        currentoperator = "+";
+                        answertext.setText("");
+                    } else {
+                        value2 = Float.parseFloat(answertext.getText().toString());
+                        performOperation();
+                        currentoperator = "+";
+                    }
                 }
                 break;
 
             case R.id.buttonequals:
-                if (currentoperator == "none") {
-                    value1 = Float.parseFloat(answertext.getText().toString());
-                    //currentoperator = "none";
-                    //answertext.setText("");
-                } else {
-                    value2 = Float.parseFloat(answertext.getText().toString());
-                    performOperation();
-                    currentoperator = "none";
+                if ((answertext.getText().length() > 0) && (!(answertext.getText().toString().equals("."))) && (!(answertext.getText().toString().equals("-.")))){
+                    if (currentoperator == "none") {
+                        value1 = Float.parseFloat(answertext.getText().toString());
+                        //currentoperator = "none";
+                        //answertext.setText("");
+                    } else {
+                        value2 = Float.parseFloat(answertext.getText().toString());
+                        performOperation();
+                        currentoperator = "none";
+                    }
                 }
                 break;
 
@@ -243,46 +243,71 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.buttonbackspace:
-
-                answertext.setText(answertext.getText().subSequence(0, answertext.length() - 1));
-                //answertext.setText(answertext.getText(answertext, 0, answertext.length()));
+                if (answertext.getText().length() > 0)
+                    answertext.setText(answertext.getText().subSequence(0, answertext.length() - 1));
                 break;
 
-            case R.id.buttonsettings:
-                    Intent intent = new Intent(MainActivity.this, Settings.class);
-                    startActivity(intent);
-                break;
 
             case R.id.buttonplusminus:
-                //answertext.getText().subSequence(0, 0);
-                if ((answertext.getText().charAt(0) != '-'))
-                    answertext.setText("-" + answertext.getText());
-                else
-                    answertext.setText(answertext.getText().subSequence(1, answertext.getText().length()));
+                if (answertext.getText().length() > 0) {
+                    if ((answertext.getText().charAt(0) != '-')) {
+                        answertext.setText("-" + answertext.getText());
+                    }
+                    else {
+                        answertext.setText(answertext.getText().subSequence(1, answertext.getText().length()));
+                    }
+                }
                 break;
 
             case R.id.buttonmult:
-                if (currentoperator == "none") {
-                    value1 = Float.parseFloat(answertext.getText().toString());
-                    currentoperator = "*";
-                    answertext.setText("");
-                } else {
-                    value2 = Float.parseFloat(answertext.getText().toString());
-                    performOperation();
-                    currentoperator = "*";
+                if ((answertext.getText().length() > 0) && (!(answertext.getText().toString().equals("."))) && (!(answertext.getText().toString().equals("-.")))){
+                    if (currentoperator == "none") {
+                        value1 = Float.parseFloat(answertext.getText().toString());
+                        currentoperator = "*";
+                        answertext.setText("");
+                    } else {
+                        value2 = Float.parseFloat(answertext.getText().toString());
+                        performOperation();
+                        currentoperator = "*";
+                    }
                 }
                 break;
 
             case R.id.buttondivide:
-                if (currentoperator == "none") {
-                    value1 = Float.parseFloat(answertext.getText().toString());
-                    currentoperator = "/";
-                    answertext.setText("");
-                } else {
-                    value2 = Float.parseFloat(answertext.getText().toString());
-                    performOperation();
-                    currentoperator = "/";
+                if ((answertext.getText().length() > 0) && (!(answertext.getText().toString().equals("."))) && (!(answertext.getText().toString().equals("-.")))){
+                    if (currentoperator == "none") {
+                        value1 = Float.parseFloat(answertext.getText().toString());
+                        currentoperator = "/";
+                        answertext.setText("");
+                    } else {
+                        value2 = Float.parseFloat(answertext.getText().toString());
+                        performOperation();
+                        currentoperator = "/";
+                    }
                 }
+                break;
+
+            case R.id.buttonbgcolor:
+                if (!containsdecimal(answertext.getText()))
+                    answertext.append(".");
+
+                break;
+
+            case R.id.buttonbuttoncolor:
+                int red = rand.nextInt(255);
+                int green = rand.nextInt(255);
+                int blue = rand.nextInt(255);
+
+                button0.setBackgroundColor(Color.rgb(red, green, blue));
+
+                break;
+
+            case R.id.buttontextcolor:
+
+                break;
+
+            case R.id.buttonreset:
+
                 break;
 
             case R.id.buttondecimal:

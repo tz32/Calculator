@@ -216,10 +216,28 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:layout_width="320dp"
+                android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:text="Settings"
-                android:id="@+id/buttonsettings"
+                android:text="Background Color"
+                android:id="@+id/buttonbgcolor" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="Button Color"
+                android:id="@+id/buttonbuttoncolor" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="Text Color"
+                android:id="@+id/buttontextcolor" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="Reset"
+                android:id="@+id/buttonreset"
                 android:background="#3625ff"
                 android:textColor="@color/textColor"
                 android:textSize="25dp" />
