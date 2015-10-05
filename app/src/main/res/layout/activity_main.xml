@@ -220,18 +220,22 @@
                 android:layout_width="100dp"
                 android:layout_height="75dp"
                 android:text="Background Color"
-                android:id="@+id/buttonbuttoncolor" />
+                android:id="@+id/buttonbuttoncolor"
+                android:textSize="13dp" />
+
 
             <Button
                 android:layout_width="100dp"
                 android:layout_height="75dp"
                 android:text="Text Color"
-                android:id="@+id/buttontextcolor" />
+                android:id="@+id/buttontextcolor"
+                android:textSize="25dp"
+            />
 
             <Button
                 android:layout_width="100dp"
                 android:layout_height="75dp"
-                android:text="Reset"
+                android:text="Reset Colors"
                 android:id="@+id/buttonreset"
                 android:background="#3625ff"
                 android:textColor="@color/textColor"

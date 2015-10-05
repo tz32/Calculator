@@ -1,4 +1,4 @@
-package android.calculator;
+    package android.calculator;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -42,6 +42,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     int red, green, blue;
 
+    int num1, num2;
 
     float value1 = 0;
     float value2 = 0;
